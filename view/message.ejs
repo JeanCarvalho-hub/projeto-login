@@ -1,0 +1,12 @@
+<% if(errors && errors.length > 0) { %>
+    <div class="message_erros_alert">
+        <% errors.forEach(e => { %>
+            <p><%= e %></p>
+        <% }); %>
+    </div>
+<% }; %>
+<% if(success){ %>
+    <div class="message_success_alert">
+        <p><%= success %></p>
+    </div>
+<% }; %>

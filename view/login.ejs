@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>login</title>
+        <link rel="stylesheet" href="./assets/css/style-login.css">
+    </head>
+    <body>
+        <section class="content-login">
+            <header>
+                <h1 class="title-page">Welcome again.</h1>
+            </header>
+            <main>
+                <h2>Login</h2>
+                <div class="login-account">
+                    <div>
+                        <form method="POST" action="/autentic" class="form-class">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                            <input type="text" name="user[email]" id="user_id" class="user-box-input" maxlength="30" minlength="3" placeholder="email" autocomplete="off" autofocus required>
+                            <input type="password" name="user[pass]" id="user_pass" class="user-box-input" maxlength="50" minlength="6" placeholder="typing your password">
+                            <button type="submit" class="btn-form">Enter</button>
+                        </form>
+                    </div>
+                    <div>
+                        <p>Dont's have account?<span><a href="create" class="btn-register"> Create new</a></span></p>
+                    </div>
+                </div>
+                <div>
+                    <%- include("message") %>
+                </div>
+            </main>
+        </section>
+    </body>
+</html>

@@ -1,0 +1,11 @@
+<div class="testetb">
+    <h2>Você tem certeza que sair da sua conta ?</h2>
+    <p>Você irá perder a sessão conectada</p>
+    <div>
+        <form action="/logout" method="POST">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button name="btn_logout" class="btn_logout" type="submit" value="yes_logout">Sim</button>
+            <button name="btn_logout" class="btn_logout" type="submit" value="no_logout">Não</button>
+        </form>
+    </div>
+</div>

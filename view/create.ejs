@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>register</title>
+    <link rel="stylesheet" href="./assets/css/style-register.css">
+</head>
+<body>
+    <main>
+        <section class="content-register">
+            <header>
+                <h1>Sing up</h1>
+            </header>
+            <div class="box-create">
+                <form action="/admin" method="POST" class="form-class">
+                    <input type="hidden" name="_csrf", value="<%= csrfToken %>">
+                    <input type="text" name="user[username]" id="user-id-registrer" class="user-box-input" maxlength="30" minlength="3"
+                        placeholder="create your id" required autocomplete="off">
+                    <input type="text" name="user[email]" id="user-email" class="user-box-input" maxlength="30"
+                        placeholder="typing email" required autocomplete="off">
+                    <input type="password" name="user[pass]" id="user-pass-registrer" class="user-box-input" maxlenght="50"
+                        minlength="6" placeholder="create your password" required>
+                    <input type="password" name="user[passcheck]" id="user-pass-registrer-check" class="user-box-input"
+                        maxlenght="30" minlength="6" placeholder="create your password" required>
+                    <button type="submit" class="btn-form">Create account</button>
+                </form>
+            </div>
+            <div>
+                <p>You have accout?<span><a href="login"> Login</a></span></p>
+            </div>
+            <div>
+                <%- include("message") %>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

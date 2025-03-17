@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <meta name="token" value="<%= csrfToken %>">
     <style>
         body{
             background-color: #eeeeee;
@@ -91,6 +92,8 @@
             transition: all 0.5s ease;
             box-shadow: -5px 5px 0px rgba(19, 19, 19);
             border:3px solid rgb(19, 19, 19);
+            display: flex;
+            flex-direction: column;
         }
         .titulo-form-link{
             margin:2em 0;
@@ -103,12 +106,13 @@
             justify-content: center;
             gap:1em;
         }
+        .btn-close-div{
+            align-self: flex-end;
+        }
         .btn-close{
             background-color: rgb(72, 233, 134);
             padding: 0.8em 1em;
             border-radius: 50px;
-            position: relative;
-            right: -10em;
             border:1px solid black;
             cursor:pointer;
         }
@@ -128,6 +132,36 @@
             margin-top:2em;
             cursor:pointer;
         }
+        ul{
+            padding:0;
+            width: 50%;
+            margin: auto;
+        }
+        li{
+            list-style: none;
+            margin:0;
+            padding: 0;
+            text-align: left;
+            display: flex;
+            gap:5em;
+
+        }
+        .content-link-box{
+            text-decoration: none;
+            margin: 0;
+            padding:0;
+            text-align: left;
+        }
+        .btnEdit{
+            border:none;
+
+        }
+        .btnEdit img{
+            width: 1.5em;
+            background-color: #0c0c0c;
+            border-radius: 50px;
+            padding:0.8em;
+        }
     </style>
 </head>
 <body>
@@ -146,11 +180,11 @@
             </div>
             <div class="div-list-form" style="display: none;">
                 <div class="box-list-form">
-                    <div>
+                    <div class="btn-close-div">
                         <a class="btn-close">X</a>
                     </div>
                     <h2 class="titulo-form-link">Adicione um link</h2>
-                    <form class="form-link" method="POST">
+                    <form class="form-link" method="POST" action="/added">
                         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                         <input id="form-titulo" class="form-link-input" name="link[titulo]" required placeholder="Titulo">
                         <input id="form-link" class="form-link-input" name="link[link]" required placeholder="Url">
@@ -162,6 +196,21 @@
                 <h2>Meus links</h2>
                 <nav class="nav-link">
                     <ul class="ul-link">
+                        <%if(links && links.length > 0){ %>
+                            <% links.forEach(l => { %>
+                                <li data-id="<%= l._id %>">
+                                    <div class="link-show-list">
+                                        <div>
+                                            <h3><%= l.titulo %></h3>
+                                        </div>
+                                        <div>
+                                            <p><%= l.link %></p>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class='btnEdit' data-id="<%= l._id %>"><img src="./assets/image/icon.png"></button>
+                                </li>
+                            <% }) %>
+                        <% }%>
                     </ul>
                 </nav>
                 <button class="btn-add-link">Adicionar</button>

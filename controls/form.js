@@ -1,5 +1,6 @@
 const { csrfToken } = require("../middlewares/middleware");
 const Login = require('../models/homeModels');
+const Link = require('../models/contatoModels');
 
 exports.home = (req, res) => {
     res.send(`
@@ -7,19 +8,20 @@ exports.home = (req, res) => {
         <p>faça login <a href="login">aqui</a><p>
         `)
 }
-exports.dashboard = (req, res) => {
+exports.dashboard = async (req, res) => {
     if(req.session.user){
+        const link = new Link(req.session.user, req)
+        const linkTable = await link.showLink()
         res.render('dashboard', {
             user: req.session.user.username,
-            showMessage: req.query.q === 'logout'
+            showMessage: req.query.q === 'logout',
+            links: linkTable
         });
         return
     }
     res.redirect('login');
 }
 exports.login = (req, res) => {
-    console.log(req.session.user);
-    console.log(res.locals);
     if(req.session.user){
         res.redirect('dashboard');
         return
@@ -44,7 +46,7 @@ exports.autentic = async(req, res) => {
         req.session.user = login.user
         console.log(req.session);
         req.session.save(function(){
-            res.redirect('login')
+            res.redirect('dashboard')
         })
     }catch(e){
         console.log(e);
